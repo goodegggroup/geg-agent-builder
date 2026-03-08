@@ -3,14 +3,16 @@ import { supabase } from "@/lib/supabaseClient";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const body = await req.json();
+
+  const { id } = await params;
 
   const { data, error } = await supabase
     .from("agent_runs")
     .update(body)
-    .eq("id", params.id)
+    .eq("id", id)
     .select("*")
     .single();
 
