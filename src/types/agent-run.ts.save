@@ -1,0 +1,16 @@
+export type AgentRunStatus = "queued" | "running" | "completed" | "failed";
+
+export type AgentRun = {
+  id: string;
+  agent_name: string;
+  status: AgentRunStatus;
+  input: Record<string, unknown> | null;
+  output: Record<string, unknown> | null;
+  error: string | null;
+  created_at: string;
+};
+
+export type CreateAgentRunInput = {
+  agent_name: string;
+  input?: Record<string, unknown>;
+};
